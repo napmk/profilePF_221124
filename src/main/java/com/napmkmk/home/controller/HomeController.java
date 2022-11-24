@@ -3,6 +3,7 @@ package com.napmkmk.home.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.yaml.snakeyaml.tokens.DocumentEndToken;
 
 import com.napmkmk.home.dao.IDao;
+import com.napmkmk.home.dto.MemberDto;
 
 @Controller
 public class HomeController {
@@ -93,4 +95,28 @@ public class HomeController {
 		return "question";
 	}
 	
+	@RequestMapping (value = "logout")
+	public String logout(HttpSession session) {
+		
+		session.invalidate();
+		
+		return "login";
+	}
+	
+	@RequestMapping (value = "loginOk")
+	public String loginOk(HttpServletRequest request, Model model) {
+		
+		String mid = request.getParameter("mid");
+		String mpw = request.getParameter("mpw");
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		int checkIdFlag = dao.checkId(mid); 
+		//가입하려는 아이디 존재시 1, 가입하려는 아이디 존재하지 않으면 0이 반환
+		if(checkIdFlag == 1) {
+		model.addAttribute("checkIdFlag",checkIdFlag);
+		}
+
+		return "loginOk";
+	}
 }
