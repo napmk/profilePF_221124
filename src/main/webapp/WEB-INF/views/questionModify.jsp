@@ -31,26 +31,32 @@
 						<td class="content">
 						<center>
 							<table width="400" border="0" cellspacing="0" cellpadding="10">
-								<form action="questionOk" method="post" name="board_frm">
+								<form action="questionModifyOk" method="post" name="board_frm">
+								<input type="hidden" value="${qDtos.qnum }" name="qnum">
 									<tr>
 										<td><span class="lb_txt">ID</span></td>
-										<td><input class="input_type01" type="text" name="qid" value="${memberId }" readonly="readonly"></td>
+										<td><input class="input_type01" type="text" name="qid" value="${qDtos.qid }" readonly="readonly"></td>
 									</tr>
 									<tr>
 										<td><span class="lb_txt">NAME</span></td>
-										<td><input class="input_type01" type="text" name="qname"></td>
+										<td><input class="input_type01" type="text" name="qname" value="${qDtos.qname }" ></td>
 									</tr>
 									<tr>
 										<td><span class="lb_txt">QUESTION</span></td>
-										<td><textarea class="textarea_type01" cols="30" rows="5" name="qcontent"></textarea></td>
+										<td><textarea class="textarea_type01" cols="30" rows="5" name="qcontent" >${qDtos.qcontent }</textarea></td>
 									</tr>
 									<tr>
 										<td><span class="lb_txt">E-MAIL</span></td>
-										<td><input class="input_type01" type="text" name="qemail"></td>
+										<td><input class="input_type01" type="text" name="qemail" value="${qDtos.qemail }" ></td>
+									</tr>
+									<tr>
+										<td><span class="lb_txt">DATE</span></td>
+										<td><input class="input_type01" type="text" name="qdate" value="${qDtos.qdate }"  readonly="readonly"></td>
 									</tr>
 									<tr>
 										<td colspan="2">
-											<input class="button_type01" type="button" value="질문하기" onclick="boardCheck()">&nbsp;&nbsp;
+											<input class="button_type01" type="submit" value="수정완료">&nbsp;&nbsp;
+											<input class="button_type01" type="button" value="삭제" onclick="script:window.location='questionDelete?qnum=${qDtos.qnum}'">&nbsp;&nbsp;
 											<input class="button_type01" type="button" value="글목록" onclick="script:window.location='list'">
 										</td>
 									</tr>

@@ -7,7 +7,7 @@
 <title>INDEX Napmkmk</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/title.css"> 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/content.css"> 
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/board.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/join.js"></script>
 </head>
 <body>
 <%@ include file="inc/header.jsp" %>
@@ -31,27 +31,33 @@
 						<td class="content">
 						<center>
 							<table width="400" border="0" cellspacing="0" cellpadding="10">
-								<form action="questionOk" method="post" name="board_frm">
+								<form action="memberModifyOk" method="post" name="join_frm">
 									<tr>
-										<td><span class="lb_txt">ID</span></td>
-										<td><input class="input_type01" type="text" name="qid" value="${memberId }" readonly="readonly"></td>
+										<td><span class="lb_txt">MEMBER ID</span></td>
+										<td><input class="input_type01" type="text" name="mid" value="${memberDto.mid }" readonly="readonly"></td>
+									</tr>
+									<tr>
+										<td><span class="lb_txt">PASSWORD</span></td>
+										<td><input class="input_type01" type="password" name="mpw"></td>
+									</tr>
+									<tr>
+										<td><span class="lb_txt">PW CHECK</span></td>
+										<td><input class="input_type01" type="password" name="mpw_check"></td>
 									</tr>
 									<tr>
 										<td><span class="lb_txt">NAME</span></td>
-										<td><input class="input_type01" type="text" name="qname"></td>
-									</tr>
-									<tr>
-										<td><span class="lb_txt">QUESTION</span></td>
-										<td><textarea class="textarea_type01" cols="30" rows="5" name="qcontent"></textarea></td>
+										<td><input class="input_type01" type="text" name="mname" value="${memberDto.mname }"></td>
 									</tr>
 									<tr>
 										<td><span class="lb_txt">E-MAIL</span></td>
-										<td><input class="input_type01" type="text" name="qemail"></td>
+										<td><input class="input_type01" type="text" name="memail" value=""${memberDto.memail }""></td>
 									</tr>
+									
 									<tr>
 										<td colspan="2">
-											<input class="button_type01" type="button" value="질문하기" onclick="boardCheck()">&nbsp;&nbsp;
-											<input class="button_type01" type="button" value="글목록" onclick="script:window.location='list'">
+										    <input class="button_type01" type="button" value="수정완료" onclick="joinCheck()">&nbsp;&nbsp;
+											<input class="button_type01" type="submit"  value="취소" onclick="script:window.location='index'">
+											
 										</td>
 									</tr>
 								</form>

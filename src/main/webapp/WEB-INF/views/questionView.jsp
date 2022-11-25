@@ -10,7 +10,9 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/board.js"></script>
 </head>
 <body>
+	
 <%@ include file="inc/header.jsp" %>
+
 <center>
 	<table width="75%" border="0" cellspacing="0" cellpadding="20" class="mt50">
 		<tr>
@@ -31,27 +33,52 @@
 						<td class="content">
 						<center>
 							<table width="400" border="0" cellspacing="0" cellpadding="10">
-								<form action="questionOk" method="post" name="board_frm">
+								<form action="questionModify" method="post" name="board_frm">
+								<input type="hidden" value="${qDtos.qnum }" name="qnum">
 									<tr>
 										<td><span class="lb_txt">ID</span></td>
-										<td><input class="input_type01" type="text" name="qid" value="${memberId }" readonly="readonly"></td>
+										<td>${qDtos.qid }</td>
 									</tr>
 									<tr>
 										<td><span class="lb_txt">NAME</span></td>
-										<td><input class="input_type01" type="text" name="qname"></td>
+										<td>${qDtos.qname }</td>
 									</tr>
 									<tr>
 										<td><span class="lb_txt">QUESTION</span></td>
-										<td><textarea class="textarea_type01" cols="30" rows="5" name="qcontent"></textarea></td>
+										<td><textarea class="textarea_type01" cols="30" rows="5" name="qcontent" readonly="readonly">${qDtos.qcontent }</textarea></td>
 									</tr>
 									<tr>
 										<td><span class="lb_txt">E-MAIL</span></td>
-										<td><input class="input_type01" type="text" name="qemail"></td>
+										<td>${qDtos.qemail }</td>
+									</tr>
+									<tr>
+										<td><span class="lb_txt">DATE</span></td>
+										<td>${qDtos.qdate }</td>
 									</tr>
 									<tr>
 										<td colspan="2">
-											<input class="button_type01" type="button" value="질문하기" onclick="boardCheck()">&nbsp;&nbsp;
+										<%
+											String boardId= (String)request.getAttribute("qId");
+										
+											if(boardId.equals("GUEST")){ //로그인안됨 
+										%>
+											<input class="button_type01" type="submit" value="수정">&nbsp;&nbsp;
+											<input class="button_type01" type="button" value="삭제" onclick="script:window.location='questionDelete?qnum=${qDtos.qnum}'">&nbsp;&nbsp;
 											<input class="button_type01" type="button" value="글목록" onclick="script:window.location='list'">
+										<%
+										} else if ((sessionId != null) && sessionId.equals(boardId)){
+										%>
+											<input class="button_type01" type="submit" value="수정">&nbsp;&nbsp;
+											<input class="button_type01" type="button" value="삭제" onclick="script:window.location='questionDelete?qnum=${qDtos.qnum}'">&nbsp;&nbsp;
+											<input class="button_type01" type="button" value="글목록" onclick="script:window.location='list'">
+										
+										<%
+										} else {
+										%>
+											<input class="button_type01" type="button" value="글목록" onclick="script:window.location='list'">
+										<%
+										}
+										%>	
 										</td>
 									</tr>
 								</form>

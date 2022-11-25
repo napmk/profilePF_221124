@@ -49,7 +49,8 @@
 							}
 						%>
 						
-							${mid }님 로그인 하셨습니다. 반갑습니다.
+							${mid }님 로그인 하셨습니다. 반갑습니다.<br>
+							${memberDto.mname }님의 가입일은 [${memberDto.mdate }] 입니다
 						</td>
 					</tr>
 				</table>
