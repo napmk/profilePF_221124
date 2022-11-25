@@ -104,7 +104,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping (value = "loginOk")
-	public String loginOk(HttpServletRequest request, Model model) {
+	public String loginOk(HttpServletRequest request, Model model, HttpSession session) {
 		
 		String mid = request.getParameter("mid");
 		String mpw = request.getParameter("mpw");
@@ -112,9 +112,18 @@ public class HomeController {
 		IDao dao = sqlSession.getMapper(IDao.class);
 		
 		int checkIdFlag = dao.checkId(mid); 
-		//가입하려는 아이디 존재시 1, 가입하려는 아이디 존재하지 않으면 0이 반환
-		if(checkIdFlag == 1) {
+		//로그인하려는 아이디 존재시 1, 로그인하려는 아이디 존재하지 않으면 0이 반환
+		int checkIdPwFlag = dao.checkIdAndPW(mid, mpw);
+		//로그인하려는 아이디와 비밀번호가 모두 일치하는 데이터가 존재하면 1 아니면 0이 반환
+		
 		model.addAttribute("checkIdFlag",checkIdFlag);
+		model.addAttribute("checkIdPwFlag",checkIdPwFlag);
+		
+		
+		
+		if(checkIdPwFlag == 1) {   //로그인실행
+			session.setAttribute("memberId", mid);
+			model.addAttribute("mid",mid);
 		}
 
 		return "loginOk";

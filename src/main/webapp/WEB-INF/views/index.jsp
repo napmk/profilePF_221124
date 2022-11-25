@@ -12,7 +12,7 @@
 <%@ include file="inc/header.jsp" %>
 
 <center>
-	<table width="75%" border="0" cellspacing="0" cellpadding="20">
+	<table width="75%" border="0" cellspacing="0" cellpadding="20"  class="mt50">
 		<tr>
 			<td class="center">
 				<span class="title01">Napmkmk Profile</span>

@@ -28,9 +28,28 @@
 				<table width="80%" border="0" cellspacing="0" cellpadding="10">
 					<tr class="contentbox">
 						<td class="content">
-							안녕하세요 Totori world 입니다.<br>
-							보시고 계신 페이지는 Spring Boot Framework으로 개발되었습니다.<br>
-							Totori world에 대해 궁금한 점이 있으시면 게시판으로 문의 해주세요<br>
+						<%
+							int checkIdFlag = Integer.parseInt(request.getAttribute("checkIdFlag").toString()) ;
+							int checkIdPwFlag = Integer.parseInt(request.getAttribute("checkIdPwFlag").toString()) ;
+							if(checkIdFlag == 0){
+			
+						%>
+						<script type="text/javascript">
+							alert("입력하신 아이디는 존재하지 않습니다. 다시 확인해주세요");
+							history.go(-1);
+						</script>
+						<%
+							} else if(checkIdPwFlag == 0){
+						%>
+						<script type="text/javascript">
+							alert("입력하신 비밀번호가 일치하지 않습니다.다시 확인해주세요");
+							history.go(-1);
+						</script>
+						<%
+							}
+						%>
+						
+							${mid }님 로그인 하셨습니다. 반갑습니다.
 						</td>
 					</tr>
 				</table>
